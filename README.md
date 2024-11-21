@@ -5,6 +5,7 @@ This repo contains the frontend code built using React for the Minesweeper game.
 The Backend is built with Python and Django and the code is available at [Minesweeper API](https://github.com/fnscoder/minesweeper-api)
 
 You can check the live game here: [Minesweeper](https://minesweeper-web-eight.vercel.app/)
+API is available here: [Minesweeper API](https://minesweeper-api-dgov.onrender.com/api/)
 
 ## How to run the project
 
