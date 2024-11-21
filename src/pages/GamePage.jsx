@@ -7,6 +7,7 @@ import GameFinishedMessage from '../components/GameFinishedMessage';
 import ActionModal from '../components/ActionModal';
 import CongratsModal from '../components/CongratsModal';
 import FlashMessage from '../components/FlashMessage';
+import Loading from '../components/Loading';
 
 const GamePage = () => {
   const [game, setGame] = useState(null);
@@ -50,6 +51,7 @@ const GamePage = () => {
   };
 
   const handleReveal = async () => {
+    setLoading(true);
     try {
       const cell = game.cells.find(c => c.row === selectedCell.row && c.column === selectedCell.column);
       if (cell.is_flagged) {
@@ -62,10 +64,13 @@ const GamePage = () => {
     } catch (error) {
       const errorMessage = error.response?.data || 'Error revealing cell. Please try again.';
       setError(errorMessage);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleFlag = async () => {
+    setLoading(true);
     try {
       const data = await flagCell(gameId, selectedCell);
       const updatedCell = data;
@@ -82,6 +87,8 @@ const GamePage = () => {
     } catch (error) {
       const errorMessage = error.response?.data || 'Error flagging cell. Please try again.';
       setError(errorMessage);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -90,45 +97,43 @@ const GamePage = () => {
   };
 
   const handleCongratsSubmit = async (name) => {
+    setLoading(true);
     try {
       await updateGameUser(gameId, name);
       setCongratsModalOpen(false);
     } catch (error) {
       const errorMessage = error.response?.data || 'Error updating game with user name. Please try again.';
       setError(errorMessage);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
+      {loading && <Loading />}
+      {error && <FlashMessage message={error} onClose={() => setError('')} />}
+      {game && !loading ? (
         <>
-          {error && <FlashMessage message={error} onClose={() => setError('')} />}
-          {game ? (
-            <>
-              <FlagCounter flagsUsed={flagsUsed} totalMines={game.mines} />
-              <Game game={game} onCellClick={handleCellClick} />
-              {game.status !== 'active' && (
-                <GameFinishedMessage status={game.status} onNewGame={handleNewGame} />
-              )}
-              <ActionModal
-                isOpen={modalOpen}
-                onClose={() => setModalOpen(false)}
-                onReveal={handleReveal}
-                onFlag={handleFlag}
-              />
-              <CongratsModal
-                isOpen={congratsModalOpen}
-                onClose={() => setCongratsModalOpen(false)}
-                onSubmit={handleCongratsSubmit}
-              />
-            </>
-          ) : (
-            <p>Loading game...</p>
+          <FlagCounter flagsUsed={flagsUsed} totalMines={game.mines} />
+          <Game game={game} onCellClick={handleCellClick} />
+          {game.status !== 'active' && (
+            <GameFinishedMessage status={game.status} onNewGame={handleNewGame} />
           )}
+          <ActionModal
+            isOpen={modalOpen}
+            onClose={() => setModalOpen(false)}
+            onReveal={handleReveal}
+            onFlag={handleFlag}
+          />
+          <CongratsModal
+            isOpen={congratsModalOpen}
+            onClose={() => setCongratsModalOpen(false)}
+            onSubmit={handleCongratsSubmit}
+          />
         </>
+      ) : (
+        !loading && <p>Loading game...</p>
       )}
     </div>
   );
