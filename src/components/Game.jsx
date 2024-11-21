@@ -1,3 +1,4 @@
+import propTypes from "prop-types";
 import Cell from './Cell';
 
 const generateBoard = (cells, rows, columns) => {
@@ -32,6 +33,25 @@ const Game = ({ game, onCellClick }) => {
       )}
     </div>
   );
+};
+
+Game.propTypes = {
+  game: propTypes.shape({
+    cells: propTypes.arrayOf(
+      propTypes.shape({
+        row: propTypes.number.isRequired,
+        column: propTypes.number.isRequired,
+        isMine: propTypes.bool,
+        isRevealed: propTypes.bool,
+        isFlagged: propTypes.bool,
+        minesAround: propTypes.number,
+      })
+    ).isRequired,
+    rows: propTypes.number.isRequired,
+    columns: propTypes.number.isRequired,
+    status: propTypes.oneOf(['active', 'won', 'lost']).isRequired,
+  }).isRequired,
+  onCellClick: propTypes.func.isRequired,
 };
 
 export default Game;

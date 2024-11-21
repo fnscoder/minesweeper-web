@@ -1,3 +1,4 @@
+import propTypes from "prop-types";
 import { useState } from 'react';
 import Button from './Button';
 
@@ -36,5 +37,11 @@ const CongratsModal = ({ isOpen, onClose, onSubmit }) => {
     </div>
   );
 };
+
+CongratsModal.propTypes = {
+  isOpen: propTypes.bool.isRequired,
+  onClose: propTypes.func.isRequired,
+  onSubmit: propTypes.func.isRequired,
+}
 
 export default CongratsModal;

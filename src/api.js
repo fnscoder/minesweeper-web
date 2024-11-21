@@ -3,7 +3,6 @@ import axios from 'axios';
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const createGame = async (gameOptions) => {
-  console.log(API_URL)
   const response = await axios.post(`${API_URL}/games/`, gameOptions);
   return response.data;
 };

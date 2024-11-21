@@ -1,3 +1,4 @@
+import propTypes from "prop-types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from './Button';
 
@@ -22,5 +23,12 @@ const ActionModal = ({ isOpen, onClose, onReveal, onFlag }) => {
     </div>
   );
 };
+
+ActionModal.propTypes = {
+  isOpen: propTypes.bool.isRequired,
+  onClose: propTypes.func.isRequired,
+  onReveal: propTypes.func.isRequired,
+  onFlag: propTypes.func.isRequired,
+}
 
 export default ActionModal;

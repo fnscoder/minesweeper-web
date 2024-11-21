@@ -1,3 +1,5 @@
+import propTypes from 'prop-types';
+
 const GameFinishedMessage = ({ status, onNewGame }) => {
   return (
     <div className="flex flex-col items-center mt-4">
@@ -10,5 +12,10 @@ const GameFinishedMessage = ({ status, onNewGame }) => {
     </div>
   );
 };
+
+GameFinishedMessage.propTypes = {
+  status: propTypes.oneOf(['won', 'lost']).isRequired,
+  onNewGame: propTypes.func.isRequired,
+}
 
 export default GameFinishedMessage;

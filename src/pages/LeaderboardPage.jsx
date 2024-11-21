@@ -9,7 +9,7 @@ const LeaderboardPage = () => {
 
   useEffect(() => {
     fetchInitialLeaderboard(size);
-  }, []);
+  }, [size]);
 
   const fetchInitialLeaderboard = async (size) => {
     try {
@@ -36,16 +36,6 @@ const LeaderboardPage = () => {
     } catch (error) {
       console.error('Error fetching leaderboard:', error);
     }
-  };
-
-  const renderLeaderboard = (mode) => {
-    return leaderboard[mode].map((entry, index) => (
-      <tr key={index}>
-        <td className="border px-4 py-2">{entry.user || 'Anonymous'}</td>
-        <td className="border px-4 py-2">{entry.duration}</td>
-        <td className="border px-4 py-2">{new Date(entry.finished_at).toLocaleString()}</td>
-      </tr>
-    ));
   };
 
   return (

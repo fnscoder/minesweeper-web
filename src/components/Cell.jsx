@@ -1,3 +1,4 @@
+import propTypes from "prop-types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Cell = ({ cell, onClick, gameStatus }) => {
@@ -20,6 +21,17 @@ const Cell = ({ cell, onClick, gameStatus }) => {
       )}
     </div>
   );
+};
+
+Cell.propTypes = {
+  cell: propTypes.shape({
+    is_revealed: propTypes.bool,
+    is_flagged: propTypes.bool,
+    is_mine: propTypes.bool,
+    adjacent_mines: propTypes.number,
+  }).isRequired,
+  onClick: propTypes.func.isRequired,
+  gameStatus: propTypes.oneOf(['active', 'won', 'lost']).isRequired,
 };
 
 export default Cell;

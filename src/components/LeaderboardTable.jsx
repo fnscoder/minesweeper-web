@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const LeaderboardTable = ({ mode, data }) => {
   return (
     <div className="mb-8">
@@ -22,6 +24,17 @@ const LeaderboardTable = ({ mode, data }) => {
       </table>
     </div>
   );
+};
+
+LeaderboardTable.propTypes = {
+  mode: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      user: PropTypes.string,
+      duration: PropTypes.number.isRequired,
+      finished_at: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default LeaderboardTable;

@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <div className="home text-center">
-      <h1 className="text-6xl mb-20">Let's play!</h1>
+      <h1 className="text-6xl mb-20">Let`s play!</h1>
       <GameControls onCreateGame={handleCreateGame} />
     </div>
   );

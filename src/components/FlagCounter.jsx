@@ -1,3 +1,4 @@
+import propTypes from "prop-types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const FlagCounter = ({ flagsUsed, totalMines }) => {
@@ -8,5 +9,10 @@ const FlagCounter = ({ flagsUsed, totalMines }) => {
     </div>
   );
 };
+
+FlagCounter.propTypes = {
+  flagsUsed: propTypes.number.isRequired,
+  totalMines: propTypes.number.isRequired,
+}
 
 export default FlagCounter;

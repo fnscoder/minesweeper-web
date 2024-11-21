@@ -1,3 +1,4 @@
+import propTypes from "prop-types";
 import { useEffect } from 'react';
 
 const FlashMessage = ({ message, onClose }) => {
@@ -17,5 +18,10 @@ const FlashMessage = ({ message, onClose }) => {
     </div>
   );
 };
+
+FlashMessage.propTypes = {
+  message: propTypes.string,
+  onClose: propTypes.func.isRequired,
+}
 
 export default FlashMessage;

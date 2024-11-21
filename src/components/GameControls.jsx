@@ -1,3 +1,4 @@
+import propTypes from "prop-types";
 import { useState } from 'react';
 import Button from './Button';
 import FlashMessage from './FlashMessage';
@@ -83,5 +84,9 @@ const GameControls = ({ onCreateGame }) => {
     </div>
   );
 };
+
+GameControls.propTypes = {
+  onCreateGame: propTypes.func.isRequired,
+}
 
 export default GameControls;
